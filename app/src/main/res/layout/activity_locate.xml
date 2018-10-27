@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.locate.LocateActivity"
+    android:id="@+id/constraintLayout">
+
+    <TextView
+        android:id="@+id/actualGridTextView"
+        android:layout_width="153dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="452dp"
+        android:text="Actual position"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/estimateGridEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/actualGridEditText"
+        android:layout_width="153dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="452dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/estimateGridTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/estimateGridTextView"
+        android:layout_width="153dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="380dp"
+        android:text="Estimated position"
+        app:layout_constraintBottom_toTopOf="@+id/actualGridTextView"
+        app:layout_constraintEnd_toStartOf="@+id/estimateGridEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/estimateGridEditText"
+        android:layout_width="153dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="380dp"
+        android:ems="10"
+        android:hint="0"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/actualGridEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/estimateGridTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.param.MagnParamFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/paramTextView"
+            android:layout_width="200dp"
+            android:layout_height="25dp"
+            android:text="Params"
+            android:textSize="8pt"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/sizeTextView"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="Grid Size" />
+
+            <AutoCompleteTextView
+                android:id="@+id/sizeEditText"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
