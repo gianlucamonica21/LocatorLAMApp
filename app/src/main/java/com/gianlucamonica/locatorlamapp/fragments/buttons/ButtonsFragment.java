@@ -99,16 +99,6 @@ public class ButtonsFragment extends Fragment {
         scanButton =  v.findViewById(R.id.scanButton);
         locateButton = v.findViewById(R.id.locateButton);
 
-        // se outdoor scan button disabled
-        if(!MyApp.getLocationMiddlewareInstance().isINDOOR_LOC()){
-            scanButton.setEnabled(false);
-            locateButton.setText("Locate outdoor");
-            locateButton.setEnabled(true);
-        }else{
-            locateButton.setText("Locate indoor");
-        }
-
-
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // quando clicco su scan button
@@ -127,29 +117,13 @@ public class ButtonsFragment extends Fragment {
             @Override
             public void onClick(View v) { // quando clicco su scan button
 
-                Log.i("locate button", "indoor " + MyApp.getLocationMiddlewareInstance().isINDOOR_LOC());
+                Intent intent = new Intent(getActivity(), LocateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("indoorParams", indoorParams);
+                Log.i("buttonsFrag", indoorParams.toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
 
-                if(MyApp.getLocationMiddlewareInstance().isINDOOR_LOC()) { // sono indoor
-
-                    Intent intent = new Intent(getActivity(), LocateActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("indoorParams", indoorParams);
-                    Log.i("buttonsFrag", indoorParams.toString());
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }else{ //outdoor
-                    Location location = MyApp.getLocationMiddlewareInstance().locate();
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-
-                    Toast.makeText(MyApp.getContext(), "Longitude:" + Double.toString(longitude) + "\nLatitude:" + Double.toString(latitude), Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(getActivity(), MapsActivity.class);
-                    intent.putExtra(EXTRA_LAT, longitude);
-                    intent.putExtra(EXTRA_LNG, latitude);
-
-                    startActivity(intent);
-                }
             }
         });
 
@@ -182,11 +156,7 @@ public class ButtonsFragment extends Fragment {
     }
 
     public void manageLocateButton(boolean isOfflineScan){
-        if(MyApp.getLocationMiddlewareInstance().isINDOOR_LOC()){
-            locateButton.setEnabled(isOfflineScan);
-        }else{
-            locateButton.setEnabled(true);
-        }
+
     }
 
     public void manageScanButton(boolean visibility){

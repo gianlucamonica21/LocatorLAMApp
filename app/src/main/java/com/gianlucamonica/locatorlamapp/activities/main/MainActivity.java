@@ -61,20 +61,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MyApp.setActivity(this);
-        locationMiddleware = new LocationMiddleware(indoorParams);
-        //locationMiddleware.init();
 
-        // forzo indoor per testing
-        locationMiddleware.setINDOOR_LOC(true);
-
-        this.INDOOR_LOC = locationMiddleware.isINDOOR_LOC();
-        Log.i("main","indoor loc " + this.INDOOR_LOC + "loc midd indoor loc " + locationMiddleware.isINDOOR_LOC());
-        if(this.INDOOR_LOC){
-            Toast.makeText(this,"You are indoor",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this,"You are outdoor",Toast.LENGTH_LONG).show();
-        }
-        MyApp.setLocationMiddlewareInstance(locationMiddleware);
 
         indoorParams = new ArrayList<>();
         databaseManager = new DatabaseManager();
