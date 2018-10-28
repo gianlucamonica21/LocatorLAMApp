@@ -110,7 +110,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             List<WifiAP> wifiAPList = databaseManager.getAppDatabase().getWifiAPDAO().getBySsid(wifiAP.getSsid());
             if( wifiAPList.size() != 0){
                 //inizio di un nuovo scan, inserisco in scanSummary
-                scanSummary = new ScanSummary(building.getId(),buildingFloor.getId(),algorithm.getId(),config.getId(), 1 ,"offline");
+                scanSummary = new ScanSummary(building.getId(),-1,algorithm.getId(),config.getId(), 1 ,"offline");
                 databaseManager.getAppDatabase().getScanSummaryDAO().insert(scanSummary);
 
                  scanSummaryList = databaseManager.getAppDatabase().getScanSummaryDAO().getScanSummaryByBuildingAlgorithm(

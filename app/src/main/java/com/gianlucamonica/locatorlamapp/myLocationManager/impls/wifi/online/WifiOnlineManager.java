@@ -18,6 +18,7 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Buil
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor.BuildingFloor;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummary;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.map.MapView;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
@@ -59,18 +60,20 @@ public class WifiOnlineManager {
         WifiManager wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         if( wifiInfo != null) {
+            Log.i("wifi online manager", "wom " + String.valueOf(building.getId() + " " + algorithm.getId() + " " + config.getId()));
 
-            List<OfflineScan> offlineScans = databaseManager.getAppDatabase().getMyDAO().getOfflineScan(building.getId(),algorithm.getId(),config.getId());
+            List<OfflineScan> offlineScans = databaseManager.getAppDatabase().getMyDAO().
+                    getOfflineScan(building.getId(),algorithm.getId(),config.getId());
             if (offlineScans.size() > 0) {
 
                 euclideanDistanceAlg = new EuclideanDistanceAlg(offlineScans, rssiValue);
                 int index = euclideanDistanceAlg.compute(AlgorithmName.WIFI_RSS_FP);
 
                 Toast.makeText(MyApp.getContext(),
-                        "Sei nel riquadro " + offlineScans.get(index).getIdGrid(),
+                        "Sei nel riquadro " + index,
                         Toast.LENGTH_SHORT).show();
 
-                OnlineScan onlineScan = new OnlineScan(offlineScans.get(0).getIdScan(),offlineScans.get(index).getIdGrid(),0,new Date());
+                OnlineScan onlineScan = new OnlineScan(offlineScans.get(0).getIdScan(),index,0,new Date());
                 return onlineScan;
             } else {
                 Toast.makeText(MyApp.getContext(),
