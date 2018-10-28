@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.gianlucamonica.locatorlamapp.R;
@@ -40,7 +41,9 @@ public class BuildingFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private List<Building> buildings;
-    Spinner  s;
+    private Spinner  s;
+    private Button newButton;
+    private ImageView imageView;
 
     private DatabaseManager databaseManager;
 
@@ -89,7 +92,17 @@ public class BuildingFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.building_fragment, container, false);
 
-        populateSpinner(v);
+        // getting building spinner
+        s = (Spinner) v.findViewById(R.id.spinner);
+        newButton = (Button) v.findViewById(R.id.newBuildingButton);
+        imageView = (ImageView) v.findViewById(R.id.imageView);
+
+        /* modifiche per applicazione progetto LAM */
+        s.setVisibility(View.INVISIBLE);
+        newButton.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
+        /***/
+        //populateSpinner(v);
 
         // getting selected item from building spinner
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,7 +119,6 @@ public class BuildingFragment extends Fragment {
         });
 
         // start activity insert building
-        Button newButton = (Button) v.findViewById(R.id.newBuildingButton);
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,8 +193,7 @@ public class BuildingFragment extends Fragment {
         for (int i=0; i < buildings.size(); i++){
             buildingsName.add(buildings.get(i).getName());
         }
-        // getting building spinner
-        s = (Spinner) v.findViewById(R.id.spinner);
+
 
         // se outdoor scan button disabled
         if(!MyApp.getLocationMiddlewareInstance().isINDOOR_LOC()){

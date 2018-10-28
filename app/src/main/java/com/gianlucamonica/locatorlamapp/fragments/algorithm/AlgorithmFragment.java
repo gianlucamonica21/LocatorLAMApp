@@ -164,7 +164,8 @@ public class AlgorithmFragment extends Fragment {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, algorithmsName);
-        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+//        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         s.setAdapter(adapter);
     }
 

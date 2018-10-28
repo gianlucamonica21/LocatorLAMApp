@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 
 import com.gianlucamonica.locatorlamapp.R;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
@@ -47,6 +48,9 @@ public class MagnParamFragment extends Fragment {
     private String mParam2;
 
     private AutoCompleteTextView sizeEditText;
+    private TextView textView;
+    private TextView sizeTextView;
+
     private int sizeValue;
 
     private Algorithm algorithm;
@@ -101,6 +105,14 @@ public class MagnParamFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_param, container, false);
         sizeEditText = v.findViewById(R.id.sizeEditText);
+        textView = v.findViewById(R.id.paramTextView);
+        sizeTextView = v.findViewById(R.id.sizeTextView);
+
+        /* modifiche per applicazione progetto LAM */
+        sizeEditText.setVisibility(View.INVISIBLE);
+        textView.setVisibility(View.INVISIBLE);
+        sizeTextView.setVisibility(View.INVISIBLE);
+        /***/
 
         Log.i("param fragment", "indoor"+MyApp.getLocationMiddlewareInstance().isINDOOR_LOC());
         // se outdoor scan button disabled

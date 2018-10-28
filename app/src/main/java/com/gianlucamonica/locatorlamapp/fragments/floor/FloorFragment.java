@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.gianlucamonica.locatorlamapp.R;
@@ -40,9 +41,11 @@ public class FloorFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private Spinner s;
+    private ImageView imageView;
+
     private OnFragmentInteractionListener mListener;
     private DatabaseManager databaseManager;
-    private Spinner s;
     private List<BuildingFloor> buildingFloors;
 
     public FloorFragment() {
@@ -83,7 +86,14 @@ public class FloorFragment extends Fragment {
         databaseManager = new DatabaseManager();
 
         View v = inflater.inflate(R.layout.fragment_floor, container, false);
+
         s = v.findViewById(R.id.floorSpinner);
+        imageView = v.findViewById(R.id.imageView);
+
+        /* modifiche per applicazione progetto LAM */
+        s.setVisibility(View.INVISIBLE);
+        imageView.setVisibility(View.INVISIBLE);
+        /***/
 
         // se outdoor scan button disabled
         if(!MyApp.getLocationMiddlewareInstance().isINDOOR_LOC()){

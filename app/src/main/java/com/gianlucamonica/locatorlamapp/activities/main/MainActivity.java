@@ -152,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements
         switch (tag){
             case BUILDING:
                 chosenBuilding = (Building) object;
+                // recupero il primo building in db
+                //chosenBuilding = databaseManager.getAppDatabase().getBuildingDAO().getBuildings().get(0);
                 indoorParamsUtils.updateIndoorParams(indoorParams,tag, chosenBuilding); // populate indoor params
 
                 FloorFragment floorFragment= (FloorFragment)
@@ -196,6 +198,16 @@ public class MainActivity extends AppCompatActivity implements
             default:
         }
 
+
+        /* modifiche progetto LAM */
+        // recupero il primo building in db
+        chosenBuilding = databaseManager.getAppDatabase().getBuildingDAO().getBuildings().get(0);
+        indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.BUILDING, chosenBuilding); // populate indoor params
+
+        chosenConfig = databaseManager.getAppDatabase().getConfigDAO().getConfigByIdAlgorithm(chosenAlgorithm.getId()).get(0);
+        indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.CONFIG, chosenConfig); // populate indoor params
+
+        /**************************/
 
 
 
