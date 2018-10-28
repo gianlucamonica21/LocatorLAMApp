@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -46,6 +47,9 @@ public class BuildingFragment extends Fragment {
     private Button newButton;
     private ImageView imageView;
 
+    private EditText widthEditText;
+    private EditText heightEditText;
+    private EditText gridSizeEditText;
     private CheckBox scanCheckBox;
 
     private DatabaseManager databaseManager;
@@ -96,39 +100,15 @@ public class BuildingFragment extends Fragment {
         View v = inflater.inflate(R.layout.building_fragment, container, false);
 
         scanCheckBox = v.findViewById(R.id.checkboxScan);
-        // getting building spinner
-        /*s = (Spinner) v.findViewById(R.id.spinner);
-        newButton = (Button) v.findViewById(R.id.newBuildingButton);
-        imageView = (ImageView) v.findViewById(R.id.imageView);*/
+        heightEditText = v.findViewById(R.id.heightEditText);
+        widthEditText = v.findViewById(R.id.widthEditText);
+        gridSizeEditText = v.findViewById(R.id.gridSizeEditText);
 
-        /* modifiche per applicazione progetto LAM */
-        /*s.setVisibility(View.INVISIBLE);
-        newButton.setVisibility(View.INVISIBLE);
-        imageView.setVisibility(View.INVISIBLE);*/
-        /***/
-        //populateSpinner(v);
+        if(getBuildingsFromDb().size() > 0){
+            heightEditText.setText(String.valueOf(getBuildingsFromDb().get(0).getHeight()) + " meters");
+            widthEditText.setText(String.valueOf(getBuildingsFromDb().get(0).getWidht())+ " meters");
+        }
 
-        // getting selected item from building spinner
-        /*s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Building chosenBuilding = getSelectedBuilding();
-                mListener.onFragmentInteraction(chosenBuilding, IndoorParamName.BUILDING); // comunico all'activity il building scelto
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Building chosenBuilding = getSelectedBuilding();
-            }
-        });
-
-        // start activity insert building
-        newButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),InsertBuildingActivity.class));
-            }
-        });*/
 
         return v;
 
@@ -136,6 +116,10 @@ public class BuildingFragment extends Fragment {
 
     public void manageCheckBox(boolean offlineScan){
         this.scanCheckBox.setChecked(offlineScan);
+    }
+
+    public void loadGridSize(int gridSize){
+        gridSizeEditText.setText(String.valueOf(gridSize) + " meter");
     }
 
     public List<Building> getBuildingsFromDb(){

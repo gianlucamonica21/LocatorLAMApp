@@ -216,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
         chosenConfig = databaseManager.getAppDatabase().getConfigDAO().getConfigByIdAlgorithm(chosenAlgorithm.getId()).get(0);
+        buildingFragment.loadGridSize(chosenConfig.getParValue());
         indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.CONFIG, chosenConfig); // populate indoor params
 
         /**************************/
@@ -252,6 +253,8 @@ public class MainActivity extends AppCompatActivity implements
                     getScanSummaryByBuildingAlgorithm(chosenBuilding.getId(),chosenAlgorithm.getId(),chosenConfig.getId());
             if(scanSummaries.size() > 0){
                 buttonsFragment.manageLocateButton(true);
+            }else {
+                buttonsFragment.manageLocateButton(false);
             }
         }
         /*

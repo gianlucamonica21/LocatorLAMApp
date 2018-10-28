@@ -42,7 +42,7 @@
                 android:enabled="false"
                 android:text="Height" />
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/heightEditText"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:enabled="false"
                 android:text="Width" />
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/widthEditText"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:enabled="false"
                 android:text="Grid Size" />
 
-            <AutoCompleteTextView
+            <EditText
                 android:id="@+id/gridSizeEditText"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
