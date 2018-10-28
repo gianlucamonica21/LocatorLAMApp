@@ -9,35 +9,20 @@
 
 
     <FrameLayout
-        android:id="@+id/floorLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/algorithmLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buildingLayout">
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/buildingLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/floorLayout"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/algorithmLayout">
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/algorithmLayout"
         android:layout_width="match_parent"
-        android:layout_height="135dp"
-        app:layout_constraintBottom_toTopOf="@+id/paramLayout"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,17 +37,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"></FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/paramLayout"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/algorithmLayout">
-
-    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

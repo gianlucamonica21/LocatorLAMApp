@@ -84,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements
         // Replace the contents of the container with the new fragment
         ft.replace(R.id.algorithmLayout, new AlgorithmFragment(), new AlgorithmFragment().getTag());
         ft.replace(R.id.buildingLayout, new BuildingFragment(), new BuildingFragment().getTag());
-        ft.replace(R.id.floorLayout, new FloorFragment(), new FloorFragment().getTag());
+        //ft.replace(R.id.floorLayout, new FloorFragment(), new FloorFragment().getTag());
         ft.replace(R.id.buttonsLayout, new ButtonsFragment(), new ButtonsFragment().getTag());
-        ft.replace(R.id.paramLayout, new MagnParamFragment(), new MagnParamFragment().getTag());
+        //ft.replace(R.id.paramLayout, new MagnParamFragment(), new MagnParamFragment().getTag());
         //ft.replace(R.id.scanLayout, new ScanFragment(), new ScanFragment().getTag());
         ft.addToBackStack(null);
         // or ft.add(R.id.your_placeholder, new FooFragment());
@@ -156,9 +156,9 @@ public class MainActivity extends AppCompatActivity implements
                 //chosenBuilding = databaseManager.getAppDatabase().getBuildingDAO().getBuildings().get(0);
                 indoorParamsUtils.updateIndoorParams(indoorParams,tag, chosenBuilding); // populate indoor params
 
-                FloorFragment floorFragment= (FloorFragment)
+                /*FloorFragment floorFragment= (FloorFragment)
                         getSupportFragmentManager().findFragmentById(R.id.floorLayout);
-                floorFragment.setFloorByBuilding(chosenBuilding);
+                floorFragment.setFloorByBuilding(chosenBuilding);*/
                 break;
             case FLOOR:
                 chosenFloor = (BuildingFloor) object;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements
                 chosenAlgorithm = (Algorithm) object;
                 indoorParamsUtils.updateIndoorParams(indoorParams,tag, chosenAlgorithm); // populate indoor params
                 // caricare fragment differente a seconda di chosenAlgorithm
-                if( chosenAlgorithm.getName().equals(String.valueOf(MAGNETIC_FP))){
+                /*if( chosenAlgorithm.getName().equals(String.valueOf(MAGNETIC_FP))){
                     Log.i("alg scelto",chosenAlgorithm.getName());
 
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements
                     Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.paramLayout);
                     if( fragment != null)
                         getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                }
+                }*/
                 break;
             case SIZE:
                 chosenSize = (int) object;
@@ -203,6 +203,17 @@ public class MainActivity extends AppCompatActivity implements
         // recupero il primo building in db
         chosenBuilding = databaseManager.getAppDatabase().getBuildingDAO().getBuildings().get(0);
         indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.BUILDING, chosenBuilding); // populate indoor params
+
+        List<ScanSummary> scanSummary = databaseManager.getAppDatabase().getScanSummaryDAO().getScanSummaryByBuildingAlgorithm(chosenBuilding.getId(),chosenAlgorithm.getId());
+        boolean offlineScan = false;
+        if(scanSummary.size() > 0){
+            offlineScan = true;
+        }
+
+        BuildingFragment buildingFragment = (BuildingFragment)
+                getSupportFragmentManager().findFragmentById(R.id.buildingLayout);
+        buildingFragment.manageCheckBox(offlineScan);
+
 
         chosenConfig = databaseManager.getAppDatabase().getConfigDAO().getConfigByIdAlgorithm(chosenAlgorithm.getId()).get(0);
         indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.CONFIG, chosenConfig); // populate indoor params
@@ -224,10 +235,10 @@ public class MainActivity extends AppCompatActivity implements
             Log.i("chosenalg main",chosenAlgorithm.getName());
             if(chosenAlgorithm.getName().equals(String.valueOf(AlgorithmName.MAGNETIC_FP))){
                 Log.i("chiamo load indPar","magn frag");
-                MagnParamFragment magnParamFragment = (MagnParamFragment)
+                /*MagnParamFragment magnParamFragment = (MagnParamFragment)
                         getSupportFragmentManager().findFragmentById(R.id.paramLayout);
                 Log.i("fragm magn", getSupportFragmentManager().getFragments().toString());
-                magnParamFragment.loadIndoorParams(indoorParams);
+                magnParamFragment.loadIndoorParams(indoorParams);*/
             }
         }
         // ****************************************************************

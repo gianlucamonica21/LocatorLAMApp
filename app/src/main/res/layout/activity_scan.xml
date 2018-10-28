@@ -12,26 +12,26 @@
         android:layout_width="125dp"
         android:layout_height="83dp"
         android:layout_marginEnd="10dp"
-        android:background="#88e1bf"
         android:text="Redo Scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/finishButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863" />
+        app:layout_constraintVertical_bias="0.863"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
         android:id="@+id/finishButton"
         android:layout_width="125dp"
         android:layout_height="83dp"
         android:layout_marginStart="10dp"
-        android:background="#88e1bf"
         android:text="Finish Scan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/redoButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863" />
+        app:layout_constraintVertical_bias="0.863"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
 </android.support.constraint.ConstraintLayout>

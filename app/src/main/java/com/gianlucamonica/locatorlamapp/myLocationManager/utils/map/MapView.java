@@ -27,7 +27,7 @@ public class MapView extends View {
 
     // scale factors for drawing map
     int scaleFactor = 100;
-    int add = 165;
+    int add = 138;
     boolean draw = true;
     // 2a versione
     private int height;
