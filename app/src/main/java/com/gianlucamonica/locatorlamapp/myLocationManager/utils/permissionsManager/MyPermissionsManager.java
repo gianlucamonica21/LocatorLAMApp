@@ -53,8 +53,6 @@ public class MyPermissionsManager {
 
 
 
-
-
     public void requestPermission(final String[] permissions){
         PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(MyApp.getActivity(),
             permissions, new PermissionsResultAction() {
