@@ -55,7 +55,8 @@
         <activity android:name=".activities.newBuilding.InsertBuildingActivity" />
         <activity android:name=".activities.scan.ScanActivity" />
         <activity android:name=".activities.locate.LocateActivity" />
-        <activity android:name=".activities.newFloor.InsertFloorActivity"></activity>
+        <activity android:name=".activities.newFloor.InsertFloorActivity" />
+        <activity android:name=".activities.scanResults.ScanResultsActivity"></activity>
     </application>
 
 </manifest>

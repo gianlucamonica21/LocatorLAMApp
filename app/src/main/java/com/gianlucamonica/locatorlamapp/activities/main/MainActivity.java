@@ -1,14 +1,20 @@
 package com.gianlucamonica.locatorlamapp.activities.main;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.gianlucamonica.locatorlamapp.R;
+import com.gianlucamonica.locatorlamapp.activities.locate.LocateActivity;
+import com.gianlucamonica.locatorlamapp.activities.scanResults.ScanResultsActivity;
 import com.gianlucamonica.locatorlamapp.fragments.algorithm.AlgorithmFragment;
 import com.gianlucamonica.locatorlamapp.fragments.building.BuildingFragment;
 import com.gianlucamonica.locatorlamapp.fragments.buttons.ButtonsFragment;
@@ -204,4 +210,27 @@ public class MainActivity extends AppCompatActivity implements
         buttonsFragment.manageLocateButton(isOfflineScan);
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //respond to menu item selection
+        switch (item.getItemId()) {
+            case R.id.scan_results:
+                Intent intent = new Intent(this, ScanResultsActivity.class);
+                /*Bundle bundle = new Bundle();
+                bundle.putSerializable("indoorParams", indoorParams);
+                Log.i("buttonsFrag", indoorParams.toString());
+                intent.putExtras(bundle);*/
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

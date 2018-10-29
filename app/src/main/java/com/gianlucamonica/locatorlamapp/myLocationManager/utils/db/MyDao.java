@@ -5,6 +5,7 @@ import android.arch.persistence.room.Query;
 
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
 
 import java.util.List;
 
@@ -19,6 +20,12 @@ public interface MyDao {
             + "INNER JOIN scanSummary ON scanSummary.id = offlineScan.idScan "
             + "WHERE scanSummary.idBuilding = :idBuilding AND scanSummary.idAlgorithm = :idAlgorithm AND scanSummary.idConfig = :idConfig")
     public List<OfflineScan> getOfflineScan(int idBuilding, int idAlgorithm, int idConfig);
+
+    @Query("SELECT onlineScan.* FROM onlineScan"
+            + " JOIN scanSummary ON scanSummary.id = onlineScan.idScan " +
+            "WHERE scanSummary.idAlgorithm = :idAlgorithm")
+    public List<OnlineScan> getOnlineScan(int idAlgorithm);
+
 
 
 }
