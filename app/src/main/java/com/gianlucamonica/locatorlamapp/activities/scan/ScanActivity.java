@@ -58,17 +58,20 @@ public class ScanActivity extends AppCompatActivity {
         Log.i("scan act","alg name "+ algorithmName);
 
         // setting location middleware
-        locationMiddleware = new LocationMiddleware(algorithmName,indoorParams);
+        //locationMiddleware = new LocationMiddleware(algorithmName,indoorParams);
 
         // setting algorithm in mylocationmanager
         //myLocationManager = new MyLocationManager(algorithmName, indoorParams);
+        myLocationManager = MyApp.getMyLocationManagerInstance();
 
         final ViewGroup mLinearLayout = (ViewGroup) findViewById(R.id.constraintLayout);
 
         // setting the map view
-        //MapView v = (MapView) myLocationManager.build(MapView.class);
-        MapView v = (MapView) locationMiddleware.build(MapView.class);
-        mLinearLayout.addView(v);
+        if(myLocationManager.getLocalizationAlgorithmInterface() != null){
+            MapView v = (MapView) myLocationManager.build(MapView.class);
+            //MapView v = (MapView) locationMiddleware.build(MapView.class);
+            mLinearLayout.addView(v);
+        }
 
 
         // handling redo scan
@@ -84,9 +87,11 @@ public class ScanActivity extends AppCompatActivity {
                 deleteScanFromDB();
                 // refreshing the mapview
 //                MapView mapView = (MapView) myLocationManager.build(MapView.class);
-                MapView mapView = (MapView) locationMiddleware.build(MapView.class);
-
-                mLinearLayout.addView(mapView);
+                if(myLocationManager.getLocalizationAlgorithmInterface() != null){
+                    v = (MapView) myLocationManager.build(MapView.class);
+                    //MapView v = (MapView) locationMiddleware.build(MapView.class);
+                    mLinearLayout.addView(v);
+                }
             }
         });
 

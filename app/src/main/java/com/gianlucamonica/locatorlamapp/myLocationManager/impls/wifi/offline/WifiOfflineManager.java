@@ -62,19 +62,30 @@ public class WifiOfflineManager extends AppCompatActivity{
 
     public <T extends View> T build(Class<T> type){
 
-        mV = new MapView(MyApp.getContext(),null, null, indoorParams, null);
-        mV.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                collectRssiByUI(event);
-                return false;
-            }
-        });
-        Toast.makeText(MyApp.getContext(),
-                "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
-                Toast.LENGTH_LONG).show();
+        if( wifiManager.getConnectionInfo() != null){
+            mV = new MapView(MyApp.getContext(),null, null, indoorParams, null);
+            mV.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    collectRssiByUI(event);
+                    return false;
+                }
+            });
+            Toast.makeText(MyApp.getContext(),
+                    "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
+                    Toast.LENGTH_LONG).show();
 
-        return type.cast(mV);
+            return type.cast(mV);
+        }else{
+
+            Toast.makeText(MyApp.getContext(),
+                    "You first have to get connected to a wifi",
+                    Toast.LENGTH_LONG).show();
+            return null;
+        }
+
+
+
 
     }
 
@@ -85,7 +96,6 @@ public class WifiOfflineManager extends AppCompatActivity{
         wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
         wifiInfo = wifiManager.getConnectionInfo();
         if(wifiInfo != null){
-
             wifiAP = new WifiAP(wifiInfo.getSSID(),wifiInfo.getMacAddress());
             List<WifiAP> wifiAPList = databaseManager.getAppDatabase().getWifiAPDAO().getBySsid(wifiAP.getSsid());
             if(wifiAPList.size() == 0){

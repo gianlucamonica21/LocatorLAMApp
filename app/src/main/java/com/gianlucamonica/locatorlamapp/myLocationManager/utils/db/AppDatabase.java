@@ -29,7 +29,7 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiAP.WifiAP
         OnlineScan.class,
         ScanSummary.class,
         WifiAP.class
-        }, version = 39)
+        }, version = 41)
 public abstract class AppDatabase extends RoomDatabase {
 
      public abstract BuildingDAO getBuildingDAO();

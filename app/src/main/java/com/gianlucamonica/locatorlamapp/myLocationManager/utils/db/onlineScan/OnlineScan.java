@@ -2,6 +2,7 @@ package com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.media.RemoteController;
@@ -13,6 +14,8 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.utils.DateCon
 import java.util.Date;
 
 @Entity(tableName = "onlineScan",
+        indices = {@Index(value = {"timeStamp"},
+                unique = true)},
         foreignKeys = {
         @ForeignKey(
                 entity = ScanSummary.class,
@@ -24,7 +27,7 @@ import java.util.Date;
 @TypeConverters(DateConverter.class)
 public class OnlineScan {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     int id;
 
     @NonNull

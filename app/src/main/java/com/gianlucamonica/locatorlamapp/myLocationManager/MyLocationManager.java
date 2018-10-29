@@ -94,14 +94,20 @@ public class MyLocationManager implements LocalizationAlgorithmInterface {
      */
     @Override
     public  <T extends View> T build(Class<T> type) {
-        return localizationAlgorithmInterface.build(type);
+        if(localizationAlgorithmInterface != null)
+            return localizationAlgorithmInterface.build(type);
+
+        return  null;
     }
 
     /**
      * @return Location computed with the specified algorithm
      */
     public <T> T locate() {
-        return localizationAlgorithmInterface.locate();
+        if(localizationAlgorithmInterface != null)
+            return localizationAlgorithmInterface.locate();
+
+        return  null;
     }
 
     /**
@@ -119,6 +125,10 @@ public class MyLocationManager implements LocalizationAlgorithmInterface {
 
     public void setMyPermissionsManager(MyPermissionsManager myPermissionsManager) {
         this.myPermissionsManager = myPermissionsManager;
+    }
+
+    public LocalizationAlgorithmInterface getLocalizationAlgorithmInterface() {
+        return localizationAlgorithmInterface;
     }
 
     @Override

@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements
 
     private Algorithm chosenAlgorithm;
     private Building chosenBuilding;
-    private BuildingFloor chosenFloor;
-    private int chosenSize;
     private Config chosenConfig;
 
     private DatabaseManager databaseManager;
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements
         MyApp.setActivity(this);
 
         /* to enable WIFI */
-        myLocationManager = new MyLocationManager(AlgorithmName.WIFI_RSS_FP,null);
+        //myLocationManager = new MyLocationManager(AlgorithmName.WIFI_RSS_FP,null);
 
         indoorParams = new ArrayList<>();
         databaseManager = new DatabaseManager();
@@ -88,23 +86,21 @@ public class MainActivity extends AppCompatActivity implements
         //databaseManager.getAppDatabase().getBuildingDAO().deleteById(11);
         // inserting building
         if(databaseManager.getAppDatabase().getBuildingDAO().getBuildings().size() == 0)
-            databaseManager.getAppDatabase().getBuildingDAO().insert(new Building("Unione",5,5,123,123,123,123));
+            databaseManager.getAppDatabase().getBuildingDAO().
+                    insert(new Building("Unione",8,8,123,123,123,123));
         // inserting algorithms
         if(databaseManager.getAppDatabase().getAlgorithmDAO().getAlgorithms().size() == 0){
             databaseManager.getAppDatabase().getAlgorithmDAO().insert(new Algorithm(String.valueOf(MAGNETIC_FP),true));
             databaseManager.getAppDatabase().getAlgorithmDAO().insert(new Algorithm(String.valueOf(AlgorithmName.WIFI_RSS_FP),true));
         }
-        /*if(databaseManager.getAppDatabase().getConfigDAO().getAllConfigs().size() == 0){
+        if(databaseManager.getAppDatabase().getConfigDAO().getAllConfigs().size() == 0){
             databaseManager.getAppDatabase().getConfigDAO().insert(
                     new Config(1,"gridSize",1)
             );
             databaseManager.getAppDatabase().getConfigDAO().insert(
-                    new Config(1,"gridSize",2)
+                    new Config(2,"gridSize",1)
             );
-            databaseManager.getAppDatabase().getConfigDAO().insert(
-                    new Config(1,"gridSize",3)
-            );
-        }*/
+         }
         // inserting onlineScan
         //databaseManager.getAppDatabase().getOnlineScanDAO().insert(new OnlineScan(2,0));
         // inserting offlineScan
@@ -142,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements
             case ALGORITHM:
                 chosenAlgorithm = (Algorithm) object;
                 indoorParamsUtils.updateIndoorParams(indoorParams,tag, chosenAlgorithm); // populate indoor params
+                myLocationManager = new MyLocationManager(AlgorithmName.valueOf(chosenAlgorithm.getName()),indoorParams);
+                MyApp.setMyLocationManagerInstance(myLocationManager);
                 break;
             default:
         }
@@ -163,8 +161,10 @@ public class MainActivity extends AppCompatActivity implements
         buildingFragment.manageCheckBox(offlineScan);
 
         chosenConfig = databaseManager.getAppDatabase().getConfigDAO().getConfigByIdAlgorithm(chosenAlgorithm.getId()).get(0);
-        buildingFragment.loadGridSize(chosenConfig.getParValue());
-        indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.CONFIG, chosenConfig); // populate indoor params
+        if(chosenConfig != null){
+            buildingFragment.loadGridSize(chosenConfig.getParValue());
+            indoorParamsUtils.updateIndoorParams(indoorParams,IndoorParamName.CONFIG, chosenConfig); // populate indoor params
+        }
 
 
         Log.i("indoorParams",indoorParams.toString());
