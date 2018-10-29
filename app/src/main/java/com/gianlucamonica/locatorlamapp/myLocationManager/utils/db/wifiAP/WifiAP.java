@@ -6,52 +6,65 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
-
-import static android.arch.persistence.room.ForeignKey.CASCADE;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiNetwork.WifiNetwork;
 
 @Entity(tableName = "wifiAP",indices = {@Index(value =
-        {"ssid"}, unique = true)})
+        {"idSsid","bssid"}, unique = true)}, foreignKeys = {
+        @ForeignKey(
+                entity = WifiNetwork.class,
+                childColumns = "idSsid",
+                parentColumns = "id",
+                onUpdate = ForeignKey.CASCADE,
+                onDelete = ForeignKey.CASCADE)})
 public class WifiAP {
 
     @PrimaryKey(autoGenerate = true)
     int id;
 
     @NonNull
-    String ssid;
+    int idSsid;
 
     @NonNull
-    String mac;
+    String bssid;
 
-    public WifiAP(@NonNull String ssid, @NonNull String mac) {
-        this.ssid = ssid;
-        this.mac = mac;
-    }
-
-    @NonNull
-    public String getSsid() {
-        return ssid;
-    }
-
-    public void setSsid(@NonNull String ssid) {
-        this.ssid = ssid;
+    public WifiAP(@NonNull int idSsid, @NonNull String bssid) {
+        this.idSsid = idSsid;
+        this.bssid = bssid;
     }
 
     @NonNull
-    public String getMac() {
-        return mac;
+    public int getIdSsid() {
+        return idSsid;
     }
 
-    public void setMac(@NonNull String mac) {
-        this.mac = mac;
+    public void setIdSsid(@NonNull int idSsid) {
+        this.idSsid = idSsid;
+    }
+
+    @NonNull
+    public String getBssid() {
+        return bssid;
+    }
+
+    public void setBssid(@NonNull String bssid) {
+        this.bssid = bssid;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "WifiAP{" +
                 "id=" + id +
-                ", ssid='" + ssid + '\'' +
-                ", mac='" + mac + '\'' +
+                ", idSsid=" + idSsid +
+                ", bssid='" + bssid + '\'' +
                 '}';
     }
 }

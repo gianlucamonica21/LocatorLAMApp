@@ -39,7 +39,8 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Buil
                 onUpdate = ForeignKey.CASCADE,
                 onDelete = ForeignKey.CASCADE)*/},
         indices = {@Index(value =
-                {"idBuilding","idAlgorithm","idConfig","type"}, unique = true)} // non posso comparire due righe aventi stesso building,algorithm,idConfig e type
+                {"idBuilding","idAlgorithm","idConfig","type","idWifiNetwork"}, unique = true)}
+                // non posso comparire due righe aventi stesso building,algorithm,idConfig,idWifiNetwork type
 )
 public class ScanSummary {
 
@@ -57,17 +58,17 @@ public class ScanSummary {
     @NonNull
     int idConfig;
 
-    int idWifiAP;
+    int idWifiNetwork;
 
     @NonNull
     String type;
 
-    public ScanSummary(int idBuilding, int idBuildingFloor, int idAlgorithm, int idConfig, int idWifiAP, String type){
+    public ScanSummary(int idBuilding, int idBuildingFloor, int idAlgorithm, int idConfig, int idWifiNetwork, String type){
         this.idBuilding = idBuilding;
         this.idBuildingFloor = idBuildingFloor;
         this.idAlgorithm = idAlgorithm;
         this.idConfig = idConfig;
-        this.idWifiAP = idWifiAP;
+        this.idWifiNetwork = idWifiNetwork;
         this.type = type;
     }
 
@@ -123,12 +124,12 @@ public class ScanSummary {
         this.idConfig = idConfig;
     }
 
-    public int getIdWifiAP() {
-        return idWifiAP;
+    public int getIdWifiNetwork() {
+        return idWifiNetwork;
     }
 
-    public void setIdWifiAP(int idWifiAP) {
-        this.idWifiAP = idWifiAP;
+    public void setIdWifiNetwork(int idWifiNetwork) {
+        this.idWifiNetwork = idWifiNetwork;
     }
 
     @NonNull
@@ -148,7 +149,7 @@ public class ScanSummary {
                 ", idBuildingFloor=" + idBuildingFloor +
                 ", idAlgorithm=" + idAlgorithm +
                 ", idConfig=" + idConfig +
-                ", idWifiAP=" + idWifiAP +
+                ", idWifiNetwork=" + idWifiNetwork +
                 ", type='" + type + '\'' +
                 '}';
     }

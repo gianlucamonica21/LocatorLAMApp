@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements
         buttonsFragment.manageLocateButton(isOfflineScan);
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
@@ -217,17 +218,13 @@ public class MainActivity extends AppCompatActivity implements
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         //respond to menu item selection
         switch (item.getItemId()) {
             case R.id.scan_results:
-                Intent intent = new Intent(this, ScanResultsActivity.class);
-                /*Bundle bundle = new Bundle();
-                bundle.putSerializable("indoorParams", indoorParams);
-                Log.i("buttonsFrag", indoorParams.toString());
-                intent.putExtras(bundle);*/
-                startActivity(intent);
+                // startActivity(new Intent(this, ScanResultsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

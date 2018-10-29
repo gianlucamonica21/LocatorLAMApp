@@ -19,6 +19,8 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.S
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummaryDAO;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiAP.WifiAP;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiAP.WifiAPDAO;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiNetwork.WifiNetwork;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiNetwork.WifiNetworkDAO;
 
 @Database(entities = {
         Building.class,
@@ -28,8 +30,9 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiAP.WifiAP
         OfflineScan.class,
         OnlineScan.class,
         ScanSummary.class,
+        WifiNetwork.class,
         WifiAP.class
-        }, version = 41)
+        }, version = 46)
 public abstract class AppDatabase extends RoomDatabase {
 
      public abstract BuildingDAO getBuildingDAO();
@@ -40,6 +43,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract BuildingFloorDAO getBuildingFloorDAO();
     public abstract ConfigDAO getConfigDAO();
     public abstract MyDao getMyDAO();
+    public abstract WifiNetworkDAO getWifiNetworkDAO();
     public abstract WifiAPDAO getWifiAPDAO();
 
 }

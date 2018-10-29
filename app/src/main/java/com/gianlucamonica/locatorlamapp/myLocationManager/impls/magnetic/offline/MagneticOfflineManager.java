@@ -126,7 +126,7 @@ public class MagneticOfflineManager implements SensorEventListener {
                                 //2) inserisco in offline scan
                                 try {
                                     databaseManager.getAppDatabase().getOfflineScanDAO().insert(
-                                            new OfflineScan(idScan,Integer.parseInt(zones.get(i)),magnitudes.get(i),new Date())
+                                            new OfflineScan(idScan,Integer.parseInt(zones.get(i)), -1, magnitudes.get(i), new Date())
                                     );
                                 } catch (NumberFormatException e) {
                                     e.printStackTrace();
@@ -194,7 +194,7 @@ public class MagneticOfflineManager implements SensorEventListener {
                         Log.i("inserisco magnitude", String.valueOf(liveMagnitude));
                         try {
                             databaseManager.getAppDatabase().getOfflineScanDAO().insert(
-                                    new OfflineScan(idScan,Integer.parseInt(liveGridName),liveMagnitude,new Date()));
+                                    new OfflineScan(idScan,Integer.parseInt(liveGridName), -1, liveMagnitude, new Date()));
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
                         }
