@@ -59,8 +59,7 @@ public class WifiOfflineManager extends AppCompatActivity{
         this.indoorParams = indoorParams;
         this.indoorParamsUtils = new IndoorParamsUtils();
         this.databaseManager = new DatabaseManager();
-        scanAPs();
-        //todo inserire nuovo ssid in db se non presente
+        scanWifiNetwork();
         building = (Building) indoorParamsUtils.getParamObject(this.indoorParams, IndoorParamName.BUILDING);
         buildingFloor = (BuildingFloor) indoorParamsUtils.getParamObject(this.indoorParams, IndoorParamName.FLOOR);
         algorithm = (Algorithm) indoorParamsUtils.getParamObject(this.indoorParams, IndoorParamName.ALGORITHM);
@@ -70,13 +69,14 @@ public class WifiOfflineManager extends AppCompatActivity{
     private final BroadcastReceiver mWifiScanReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context c, Intent intent) {
-            Log.i("sonoqui","sonoqui");
             if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
+
                 List<ScanResult> mScanResults = wifiManager.getScanResults();
                 WifiInfo info = wifiManager.getConnectionInfo ();
                 String ssid  = info.getSSID();
                 ssid =  ssid.toString().replace("\""   , "");
 
+                // recupero id della rete a cui sono connesso
                 if( databaseManager.getAppDatabase().getWifiNetworkDAO().getBySsid(ssid) != null){
                     WifiNetwork wifiNetwork = databaseManager.getAppDatabase().getWifiNetworkDAO().getBySsid(ssid).get(0);
                     idWifiNetwork = wifiNetwork.getId();
@@ -98,7 +98,6 @@ public class WifiOfflineManager extends AppCompatActivity{
 
                             // inserisco BSSID
                             insertBSSID(BSSID);
-
                             //inserisco in offlinescan
                             int idWifiAp = databaseManager.getAppDatabase().getWifiAPDAO().getByBssid(BSSID).get(0).getId();
                             List<ScanSummary> scanSummaries = null;
@@ -108,15 +107,12 @@ public class WifiOfflineManager extends AppCompatActivity{
                                     new OfflineScan(scanSummaries.get(0).getId(), Integer.valueOf(nowGrid.getName()),idWifiAp , level, new Date())
                             );
 
-
-
                             Log.i("wifi info","inserisco in db " + mScanResults.get(i).BSSID + " " + mScanResults.get(i).level
                                     + " " + nowGrid.getName());
                         }
                     }
                 }else{
-                    // inserisco solo in offlinescan
-                    // inserisco scan in db solo per rete a cui si è connessi utilizzando l'info nowRect
+
                     for(int i = 0; i < mScanResults.size(); i++){
                         if(mScanResults.get(i).SSID.toString().equals(ssid)){
                             String BSSID = mScanResults.get(i).BSSID;
@@ -132,6 +128,7 @@ public class WifiOfflineManager extends AppCompatActivity{
                             databaseManager.getAppDatabase().getOfflineScanDAO().insert(
                                     new OfflineScan(scanSummaries.get(0).getId(), Integer.valueOf(nowGrid.getName()),idWifiAp , level, new Date())
                             );
+                            Log.i("wifi info", "wifiAP " +String.valueOf(idWifiAp));
                             Log.i("wifi info","inserisco in db " + mScanResults.get(i).BSSID + " " + mScanResults.get(i).level
                                     + " " + nowGrid.getName());
                         }
@@ -142,6 +139,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             }
             clickNumber++;
             Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
+            //mWifiScanReceiver.abortBroadcast();
 
         }
     };
@@ -176,9 +174,9 @@ public class WifiOfflineManager extends AppCompatActivity{
     }
 
     /**
-     * insert the new ap if it doesn't exist yet
+     * insert the new wifi nwtwork if it doesn't exist yet
      */
-    public void scanAPs(){
+    public void scanWifiNetwork(){
         wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
         wifiInfo = wifiManager.getConnectionInfo();
         if(wifiInfo != null){
@@ -190,48 +188,6 @@ public class WifiOfflineManager extends AppCompatActivity{
         }
     }
 
-    public int wifiScan(String gridName){
-        wifiInfo = wifiManager.getConnectionInfo();
-        int rssiValue = wifiInfo.getRssi();
-        Log.i("wifiInfo", String.valueOf(rssiValue));
-        Toast.makeText(MyApp.getContext(), "Scanning in  " + gridName + "  rss  " + rssiValue, Toast.LENGTH_SHORT).show();
-        return rssiValue;
-    }
-
-    public void insertRssInDB(int rssiValue, ArrayList<Grid> rects, int i){
-
-        List<ScanSummary> scanSummaryList = null;
-
-        if(clickNumber == 0){
-            List<WifiNetwork> wifiNetworkList = databaseManager.getAppDatabase().getWifiNetworkDAO().getBySsid(wifiNetwork.getSsid());
-            if( wifiNetworkList.size() != 0){
-                //inizio di un nuovo scan, inserisco in scanSummary
-                scanSummary = new ScanSummary(building.getId(),-1,algorithm.getId(),config.getId(), 1 ,"offline");
-                databaseManager.getAppDatabase().getScanSummaryDAO().insert(scanSummary);
-
-                 scanSummaryList = databaseManager.getAppDatabase().getScanSummaryDAO().getScanSummaryByBuildingAlgorithm(
-                        building.getId(), algorithm.getId(),config.getId()
-                );
-                if(scanSummaryList.size() != 0){
-
-                    //inserisco in offlinescan
-                    databaseManager.getAppDatabase().getOfflineScanDAO().insert(
-                            new OfflineScan(scanSummaryList.get(0).getId(), Integer.valueOf(rects.get(i).getName()), -1, rssiValue, new Date())
-                    );
-                }
-            }
-        }else{
-            scanSummaryList = databaseManager.getAppDatabase().getScanSummaryDAO().getScanSummaryByBuildingAlgorithm(
-                    building.getId(), algorithm.getId(),config.getId()
-            );
-            //inserisco in offlinescan
-            databaseManager.getAppDatabase().getOfflineScanDAO().insert(
-                    new OfflineScan(scanSummaryList.get(0).getId(), Integer.valueOf(rects.get(i).getName()),-1 , rssiValue, new Date())
-            );
-        }
-
-
-    }
 
     public void collectRssiByUI(MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN){
