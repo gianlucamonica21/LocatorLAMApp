@@ -236,9 +236,11 @@ public class WifiOfflineManager extends AppCompatActivity{
     public void insertBSSID(String BSSID){
         if(idWifiNetwork != -1){
             try {
-                databaseManager.getAppDatabase().getWifiAPDAO().insert(
-                        new WifiAP(idWifiNetwork, BSSID)
-                );
+                if(databaseManager.getAppDatabase().getWifiAPDAO().getByBssid(BSSID).size() == 0){
+                    databaseManager.getAppDatabase().getWifiAPDAO().insert(
+                            new WifiAP(idWifiNetwork, BSSID)
+                    );
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

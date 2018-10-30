@@ -16,7 +16,7 @@ import java.util.Date;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "offlineScan",
-        indices = {@Index(value = {"idScan", "idGrid"},
+        indices = {@Index(value = {"idScan", "idGrid","idWifiAP"},
                 unique = true)}, // vincoli di unicità
         foreignKeys = {
         @ForeignKey( // chiave esterna
