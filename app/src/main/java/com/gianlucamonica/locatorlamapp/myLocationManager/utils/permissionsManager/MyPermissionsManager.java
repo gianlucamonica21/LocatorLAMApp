@@ -46,6 +46,10 @@ public class MyPermissionsManager {
 
                 wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(MyApp.getContext().WIFI_SERVICE);
                 isWIFIEnabled = wifiManager.isWifiEnabled();
+                locationManager = (LocationManager) MyApp.getContext()
+                        .getSystemService(LOCATION_SERVICE);
+                isGPSEnabled = locationManager
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
                 break;
         }
@@ -90,6 +94,9 @@ public class MyPermissionsManager {
                 if (!isWIFIEnabled){
                     showDialog(Settings.ACTION_WIFI_SETTINGS);
 
+                }
+                if(!isGPSEnabled){
+                    showDialog(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 }
 
                 break;

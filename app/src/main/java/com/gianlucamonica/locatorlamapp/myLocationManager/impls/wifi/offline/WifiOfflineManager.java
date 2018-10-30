@@ -139,7 +139,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             }
             clickNumber++;
             Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
-            //mWifiScanReceiver.abortBroadcast();
+            mWifiScanReceiver.abortBroadcast();
 
         }
     };
@@ -199,13 +199,13 @@ public class WifiOfflineManager extends AppCompatActivity{
 
             if(rects.size() == 0){
                 Toast.makeText(MyApp.getContext(),"scan is finished",Toast.LENGTH_SHORT).show();
+                mWifiScanReceiver.abortBroadcast();
             }else{
                 for(int i = 0; i < rects.size(); i = i + 1){
                     float aX = ((rects.get(i).getA().getX()*mV.getScaleFactor())+ mV.getAdd());
                     float bX = ((rects.get(i).getB().getX()*mV.getScaleFactor())+ mV.getAdd());
                     float bY = ((rects.get(i).getB().getY()*mV.getScaleFactor())+ mV.getAdd());
                     float aY = ((rects.get(i).getA().getY()*mV.getScaleFactor())+ mV.getAdd());
-                    String gridName = rects.get(i).getName();
 
                     if( x >= aX && x <= bX){
                         if( y <= bY && y >= aY){

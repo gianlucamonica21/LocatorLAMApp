@@ -130,7 +130,11 @@ public class LocateActivity extends AppCompatActivity {
                         actualPos = Integer.parseInt(actualGrid.getText().toString());
                     }
                     onlineScan.setIdActualPos(actualPos );
-                    databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                    try {
+                        databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     //successive altre scansioni
                     handler.postDelayed(runnable = new Runnable(){
                         public void run(){
@@ -144,7 +148,11 @@ public class LocateActivity extends AppCompatActivity {
                             }
                             onlineScan.setIdActualPos(actualPos );
 
-                            databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                            try {
+                                databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
                             estimatedGrid.setText(String.valueOf(onlineScan.getIdEstimatedPos()));
                             Log.i("locate activity", "onlinescan " + onlineScan.toString());
