@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.WifiScanReceiver;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
@@ -141,6 +142,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             }
             clickNumber++;
             Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
+            MyApp.getContext().unregisterReceiver(mWifiScanReceiver);
 
         }
     };
@@ -230,13 +232,6 @@ public class WifiOfflineManager extends AppCompatActivity{
                 }
             }
             mV.invalidate();
-            ComponentName receiver = new ComponentName(MyApp.getContext(), BroadcastReceiver.class);
-
-            PackageManager pm = MyApp.getContext().getPackageManager();
-
-            pm.setComponentEnabledSetting(receiver,
-                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                    PackageManager.DONT_KILL_APP);
         }
     }
 
