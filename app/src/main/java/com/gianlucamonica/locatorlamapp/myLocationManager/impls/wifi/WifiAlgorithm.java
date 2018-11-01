@@ -47,7 +47,6 @@ public class WifiAlgorithm implements LocalizationAlgorithmInterface {
         intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         wifiScanReceiver = new WifiScanReceiver();
         MyApp.getContext().registerReceiver(wifiScanReceiver, intentFilter);
-
     }
 
     @Override

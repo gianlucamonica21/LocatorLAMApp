@@ -64,7 +64,6 @@ public class WifiScanReceiver extends BroadcastReceiver {
                     if (mScanResults.get(i).SSID.toString().equals(ssid)) {
                         String BSSID = mScanResults.get(i).BSSID;
                         int level = mScanResults.get(i).level;
-                        int idWifiAp = 0;
 
                         MyApp.setRss(level);
                         Log.i("background","level -> " + level);

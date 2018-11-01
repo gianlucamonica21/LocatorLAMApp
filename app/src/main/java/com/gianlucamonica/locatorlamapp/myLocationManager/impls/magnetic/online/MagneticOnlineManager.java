@@ -20,6 +20,7 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.liveMeasurements.LiveMeasurements;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummary;
@@ -71,8 +72,10 @@ public class MagneticOnlineManager implements SensorEventListener {
         if (offlineScans.size() > 0) {
 
             Log.i("online manager","live magnitude " + MyApp.getMagnitude());
-            Random random = new Random();
-            euclideanDistanceAlg = new EuclideanDistanceAlg(offlineScans, MyApp.getMagnitude());
+            List<LiveMeasurements> liveMeasurements =
+                    databaseManager.getAppDatabase().getLiveMeasurementsDAO().getLiveMeasurements(1,"magn_rss");
+            double liveMagnitude = liveMeasurements.get(0).getValue();
+            euclideanDistanceAlg = new EuclideanDistanceAlg(offlineScans,liveMagnitude);
             int index = euclideanDistanceAlg.compute(AlgorithmName.MAGNETIC_FP);
             Log.i("magn online manag","index " + index);
             onlineScan = new OnlineScan(idScan,index,0,new Date());
@@ -118,6 +121,10 @@ public class MagneticOnlineManager implements SensorEventListener {
             this.magnitudeValue = Math.sqrt((magX * magX) + (magY * magY) + (magZ * magZ));
             Log.i("magn online man","magn value " + this.magnitudeValue);
             getMagnitude = true;
+            //todo inserisco in db live Measurements
+            databaseManager.getAppDatabase().getLiveMeasurementsDAO().insert(
+                    new LiveMeasurements(1,-1 , "magn_rss", magnitudeValue)
+            );
             MyApp.setMagnitude(magnitudeValue);
             // set value on the screen
             Toast.makeText(MyApp.getContext(), "m.f. value " + this.magnitudeValue, Toast.LENGTH_SHORT).show();

@@ -143,7 +143,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             clickNumber++;
             Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
             MyApp.getContext().unregisterReceiver(mWifiScanReceiver);
-
+            mV.invalidate();
         }
     };
 
@@ -231,7 +231,7 @@ public class WifiOfflineManager extends AppCompatActivity{
                     }
                 }
             }
-            mV.invalidate();
+            //mV.invalidate();
         }
     }
 
