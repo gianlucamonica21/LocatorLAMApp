@@ -1,9 +1,11 @@
 package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.offline;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -139,7 +141,6 @@ public class WifiOfflineManager extends AppCompatActivity{
             }
             clickNumber++;
             Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
-            mWifiScanReceiver.abortBroadcast();
 
         }
     };
@@ -199,7 +200,6 @@ public class WifiOfflineManager extends AppCompatActivity{
 
             if(rects.size() == 0){
                 Toast.makeText(MyApp.getContext(),"scan is finished",Toast.LENGTH_SHORT).show();
-                mWifiScanReceiver.abortBroadcast();
             }else{
                 for(int i = 0; i < rects.size(); i = i + 1){
                     float aX = ((rects.get(i).getA().getX()*mV.getScaleFactor())+ mV.getAdd());
@@ -230,6 +230,13 @@ public class WifiOfflineManager extends AppCompatActivity{
                 }
             }
             mV.invalidate();
+            ComponentName receiver = new ComponentName(MyApp.getContext(), BroadcastReceiver.class);
+
+            PackageManager pm = MyApp.getContext().getPackageManager();
+
+            pm.setComponentEnabledSetting(receiver,
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
         }
     }
 

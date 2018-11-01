@@ -11,6 +11,8 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Buil
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.BuildingDAO;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor.BuildingFloor;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor.BuildingFloorDAO;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.liveMeasurements.LiveMeasurements;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.liveMeasurements.LiveMeasurementsDAO;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScanDAO;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
@@ -31,11 +33,12 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiNetwork.W
         OnlineScan.class,
         ScanSummary.class,
         WifiNetwork.class,
-        WifiAP.class
-        }, version = 47)
+        WifiAP.class,
+        LiveMeasurements.class
+        }, version = 52)
 public abstract class AppDatabase extends RoomDatabase {
 
-     public abstract BuildingDAO getBuildingDAO();
+    public abstract BuildingDAO getBuildingDAO();
     public abstract AlgorithmDAO getAlgorithmDAO();
     public abstract OfflineScanDAO getOfflineScanDAO();
     public abstract OnlineScanDAO getOnlineScanDAO();
@@ -45,5 +48,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MyDao getMyDAO();
     public abstract WifiNetworkDAO getWifiNetworkDAO();
     public abstract WifiAPDAO getWifiAPDAO();
+    public abstract LiveMeasurementsDAO getLiveMeasurementsDAO();
 
 }

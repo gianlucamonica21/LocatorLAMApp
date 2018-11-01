@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.gianlucamonica.locatorlamapp.myLocationManager.AP_RSS;
 import com.gianlucamonica.locatorlamapp.myLocationManager.impls.EuclidDistanceMultipleAPs;
 import com.gianlucamonica.locatorlamapp.myLocationManager.impls.EuclideanDistanceAlg;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.db.AP.AP;
 import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.db.fingerPrint.WifiFingerPrint;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
@@ -23,6 +24,7 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Con
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor.BuildingFloor;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.liveMeasurements.LiveMeasurements;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummary;
@@ -67,44 +69,7 @@ public class WifiOnlineManager {
         onlineScan  = null;
     }
 
-    private final BroadcastReceiver mWifiScanReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context c, Intent intent) {
-            if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
-
-                List<ScanResult> mScanResults = wifiManager.getScanResults();
-                WifiInfo info = wifiManager.getConnectionInfo ();
-                String ssid  = info.getSSID();
-                ssid =  ssid.toString().replace("\""   , "");
-
-
-                for(int i = 0; i < mScanResults.size(); i++){
-                    // inserisco scan in db solo per rete a cui si è connessi utilizzando l'info nowRect
-                    if(mScanResults.get(i).SSID.toString().equals(ssid)){
-                        String BSSID = mScanResults.get(i).BSSID;
-                        int level = mScanResults.get(i).level;
-                        int idWifiAp = 0;
-                        try {
-                            idWifiAp = databaseManager.getAppDatabase().getWifiAPDAO().getByBssid(BSSID).get(0).getId();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        Log.i("wifi onl man","popolo ap rss " + ap_rsses.toString());
-                        ap_rsses.add(new AP_RSS(idWifiAp,level));
-
-                    }
-                }
-
-
-            }
-
-            mWifiScanReceiver.abortBroadcast();
-        }
-    };
-
     public OnlineScan locate(){
-        wifiScan();
 
        WifiManager wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -115,10 +80,15 @@ public class WifiOnlineManager {
                     getOfflineScan(building.getId(),algorithm.getId(),config.getId());
             if (offlineScans.size() > 0) {
 
-                ap_rsses.add(new AP_RSS(1,45));
-                ap_rsses.add(new AP_RSS(2,45));
-                ap_rsses.add(new AP_RSS(3,45));
-                ap_rsses.add(new AP_RSS(4,45));
+                List<LiveMeasurements> liveMeasurements =
+                        databaseManager.getAppDatabase().getLiveMeasurementsDAO().getLiveMeasurements(2,"wifi_rss");
+                ArrayList<AP_RSS> ap_rsses = new ArrayList<>();
+                for(int i = 0; i < liveMeasurements.size(); i++){
+                    int idAP = liveMeasurements.get(i).getIdAP();
+                    int value = (int) liveMeasurements.get(i).getValue();
+                    ap_rsses.add(new AP_RSS(idAP,value));
+                }
+                Log.i("ap_rss","ap_rss " + ap_rsses.toString());
                 euclidDistanceMultipleAPs = new EuclidDistanceMultipleAPs(offlineScans,ap_rsses);
                 int index = euclidDistanceMultipleAPs.compute();
 
@@ -139,14 +109,5 @@ public class WifiOnlineManager {
 
     }
 
-
-    public void wifiScan(){
-        wifiManager = (WifiManager) MyApp.getContext().getApplicationContext().getSystemService(WIFI_SERVICE);
-        // faccio partire lo scan
-        wifiManager.startScan();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-        MyApp.getContext().registerReceiver(mWifiScanReceiver, intentFilter);
-    }
 
 }

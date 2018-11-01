@@ -20,6 +20,20 @@ public class MyApp extends Application {
     private static Activity activity;
     private static double magnitude;
 
+    private static int rss;
+
+    public static void setInstance(MyApp instance) {
+        MyApp.instance = instance;
+    }
+
+    public static int getRss() {
+        return rss;
+    }
+
+    public static void setRss(int rss) {
+        MyApp.rss = rss;
+    }
+
     public static MyApp getInstance() {
         return instance;
     }

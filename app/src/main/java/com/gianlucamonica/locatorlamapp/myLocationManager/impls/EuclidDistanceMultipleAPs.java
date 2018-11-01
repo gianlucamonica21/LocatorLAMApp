@@ -1,5 +1,7 @@
 package com.gianlucamonica.locatorlamapp.myLocationManager.impls;
 
+import android.util.Log;
+
 import com.gianlucamonica.locatorlamapp.myLocationManager.AP_RSS;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 
@@ -27,15 +29,21 @@ public class EuclidDistanceMultipleAPs {
             }
         }
 
+        Log.i("compute","rss" + rss_acc.toString());
+        Log.i("compute","grids" + off_index.toString());
+
         Double min = rss_acc.get(0);
         int index = 0;
         for (int i = 0; i < rss_acc.size() - 1; i++){
-            if(rss_acc.get(i+1) < rss_acc.get(i)){
+            if(rss_acc.get(i+1) < min){
                 min = rss_acc.get(i+1);
                 index = i + 1;
             }
         }
 
-        return index;
+        Log.i("compute","Min " + min);
+        Log.i("compute","Winner  " + off_index.get(index));
+
+        return off_index.get(index);
     }
 }
