@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements
         //respond to menu item selection
         switch (item.getItemId()) {
             case R.id.scan_results:
-                // startActivity(new Intent(this, ScanResultsActivity.class));
+                startActivity(new Intent(this, ScanResultsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

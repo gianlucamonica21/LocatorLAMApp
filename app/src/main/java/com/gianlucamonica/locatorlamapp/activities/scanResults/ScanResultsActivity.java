@@ -27,21 +27,36 @@ public class ScanResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_results);
 
         databaseManager = new DatabaseManager();
-        //List<OnlineScan> onlineScans = databaseManager.getAppDatabase().getMyDAO().getOnlineScan(1);
+        List<OnlineScan> magnScans = databaseManager.getAppDatabase().getMyDAO().getOnlineScan(1);
+        List<OnlineScan> wifiScans = databaseManager.getAppDatabase().getMyDAO().getOnlineScan(2);
 
         tableLayout = findViewById(R.id.table);
-        for (int i = 0; i < 1; i++)
-        {
-            TableRow tableRow = new TableRow(this);
-            TextView textView = new TextView(this);
-            textView.setText("Algorithm");
-            tableRow.addView(tableRow);
 
-            textView.setText("Success %");
-            tableRow.addView(tableRow);
+        int wifiSucc = 0;
+        int magnSucc = 0;
 
-
-            tableLayout.addView(tableRow);
+        for(int i = 0; i < magnScans.size(); i++){
+            if(magnScans.get(i).getIdActualPos() == magnScans.get(i).getIdEstimatedPos()){
+                magnSucc++;
+            }
         }
+
+        for(int i = 0; i < wifiScans.size(); i++){
+            if(wifiScans.get(i).getIdActualPos() == wifiScans.get(i).getIdEstimatedPos()){
+                wifiSucc++;
+            }
+        }
+
+
+
+        TextView m = findViewById(R.id.magnSuccTV);
+        m.setText(String.valueOf((magnSucc * 100)/ magnScans.size()));
+
+        TextView w = findViewById(R.id.wifiSuccTV);
+        w.setText(String.valueOf((wifiSucc * 100)/ wifiScans.size()));
+
+
+
+
     }
 }
