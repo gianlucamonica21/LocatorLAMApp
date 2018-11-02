@@ -27,6 +27,8 @@ public class WifiScanReceiver extends BroadcastReceiver {
         asyncTask.execute();
     }
 
+
+
     private static class Task extends AsyncTask {
 
         private final PendingResult pendingResult;
