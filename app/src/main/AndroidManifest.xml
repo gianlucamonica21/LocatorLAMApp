@@ -42,18 +42,26 @@
             android:name=".activities.gps.GPSActivity"
             android:label="@string/title_activity_gps" />
         <activity
+            android:name=".activities.wifi.WIFIActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name=".activities.gps.fragments.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".activities.wifi.offlineActivity.OfflineWIFIActivity" />
+        <activity android:name=".activities.wifi.onlineActivity.OnlineWIFIActivity" />
+        <activity android:name=".activities.magnetic.MagneticActivity" />
+        <activity android:name=".activities.magnetic.offline.OfflineMagneticActivity" />
+        <activity android:name=".activities.magnetic.online.OnlineMagneticActivity" />
         <activity android:name=".activities.newBuilding.InsertBuildingActivity" />
         <activity android:name=".activities.scan.ScanActivity"
-            android:label="Offline Scan"/>
+            android:label="Offline Scan"
+            />
         <activity android:name=".activities.locate.LocateActivity"
             android:label="Online Scan"
             />
         <activity android:name=".activities.newFloor.InsertFloorActivity" />
-        <activity
-            android:name=".activities.scanResults.ScanResultsActivity"
-            android:label="Scan's results"
+        <activity android:name=".activities.scanResults.ScanResultsActivity"
+            android:label="Scan's Results"
             ></activity>
     </application>
 
