@@ -17,9 +17,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import com.gianlucamonica.locatorlamapp.R;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;

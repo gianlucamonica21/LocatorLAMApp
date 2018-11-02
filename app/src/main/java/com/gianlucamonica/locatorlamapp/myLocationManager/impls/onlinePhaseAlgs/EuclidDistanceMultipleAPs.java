@@ -1,8 +1,8 @@
-package com.gianlucamonica.locatorlamapp.myLocationManager.impls;
+package com.gianlucamonica.locatorlamapp.myLocationManager.impls.onlinePhaseAlgs;
 
 import android.util.Log;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.AP_RSS;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.utils.AP_RSS;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 
 import java.util.ArrayList;

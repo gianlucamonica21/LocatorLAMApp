@@ -1,4 +1,4 @@
-package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi;
+package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -65,7 +65,6 @@ public class WifiScanReceiver extends BroadcastReceiver {
                         String BSSID = mScanResults.get(i).BSSID;
                         int level = mScanResults.get(i).level;
 
-                        MyApp.setRss(level);
                         Log.i("background","level -> " + level);
                         // todo inserire in live measurements
 

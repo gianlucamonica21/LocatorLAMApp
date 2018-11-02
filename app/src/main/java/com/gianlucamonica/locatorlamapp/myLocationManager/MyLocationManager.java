@@ -1,7 +1,6 @@
 package com.gianlucamonica.locatorlamapp.myLocationManager;
 
 import android.Manifest;
-import android.app.Activity;
 import android.view.View;
 
 import com.gianlucamonica.locatorlamapp.myLocationManager.impls.magnetic.MagneticFieldAlgorithm;
@@ -9,7 +8,7 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.WifiAlgorit
 import com.gianlucamonica.locatorlamapp.myLocationManager.locAlgInterface.LocalizationAlgorithmInterface;
 import com.gianlucamonica.locatorlamapp.myLocationManager.impls.gps.GPSLocationManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;

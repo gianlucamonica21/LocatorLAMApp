@@ -13,8 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.gianlucamonica.locatorlamapp.R;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 

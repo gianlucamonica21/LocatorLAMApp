@@ -2,7 +2,6 @@ package com.gianlucamonica.locatorlamapp.fragments.buttons;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.gianlucamonica.locatorlamapp.R;
-import com.gianlucamonica.locatorlamapp.activities.gps.fragments.MapsActivity;
 import com.gianlucamonica.locatorlamapp.activities.locate.LocateActivity;
 import com.gianlucamonica.locatorlamapp.activities.scan.ScanActivity;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;
@@ -156,7 +152,7 @@ public class ButtonsFragment extends Fragment {
     }
 
     public void manageLocateButton(boolean isOfflineScan){
-
+        locateButton.setEnabled(isOfflineScan);
     }
 
     public void manageScanButton(boolean visibility){

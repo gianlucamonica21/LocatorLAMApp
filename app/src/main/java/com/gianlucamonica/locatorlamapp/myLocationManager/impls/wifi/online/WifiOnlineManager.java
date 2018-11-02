@@ -1,24 +1,16 @@
 package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.online;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.AP_RSS;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.EuclidDistanceMultipleAPs;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.EuclideanDistanceAlg;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.db.AP.AP;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.db.fingerPrint.WifiFingerPrint;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.utils.AP_RSS;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.onlinePhaseAlgs.EuclidDistanceMultipleAPs;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.onlinePhaseAlgs.EuclideanDistanceAlg;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
@@ -27,16 +19,12 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.liveMeasurements.LiveMeasurements;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummary;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.wifiNetwork.WifiNetwork;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.map.MapView;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 import static android.content.Context.WIFI_SERVICE;
 
@@ -92,9 +80,7 @@ public class WifiOnlineManager {
                 euclidDistanceMultipleAPs = new EuclidDistanceMultipleAPs(offlineScans,ap_rsses);
                 int index = euclidDistanceMultipleAPs.compute();
 
-                Toast.makeText(MyApp.getContext(),
-                        "Sei nel riquadro " + index,
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
 
                 OnlineScan onlineScan = new OnlineScan(offlineScans.get(0).getIdScan(),index,0,new Date());
                 return onlineScan;

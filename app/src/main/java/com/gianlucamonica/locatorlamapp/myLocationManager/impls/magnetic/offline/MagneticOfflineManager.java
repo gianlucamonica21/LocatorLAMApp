@@ -10,9 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
@@ -98,7 +98,7 @@ public class MagneticOfflineManager implements SensorEventListener {
         });
         Toast.makeText(MyApp.getContext(),
                 "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
 
         return type.cast(mV);
 
@@ -208,7 +208,7 @@ public class MagneticOfflineManager implements SensorEventListener {
                 }
                 // set value on the screen
                 Log.i("live magnitude", String.valueOf(liveMagnitude));
-                Toast.makeText(MyApp.getContext(), "liveMagnitude  " + liveMagnitude + " grid " + liveGridName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getContext(), "grid " + liveGridName + " scanned", Toast.LENGTH_SHORT).show();
             }
         }
         sensorManager.unregisterListener(this);

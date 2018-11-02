@@ -1,9 +1,6 @@
-package com.gianlucamonica.locatorlamapp.myLocationManager.impls;
+package com.gianlucamonica.locatorlamapp.myLocationManager.impls.onlinePhaseAlgs;
 
 import android.util.Log;
-
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.magnetic.db.magneticFingerPrint.MagneticFingerPrint;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.db.fingerPrint.WifiFingerPrint;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;
 
@@ -11,9 +8,7 @@ import java.util.List;
 
 public class EuclideanDistanceAlg {
 
-    private List<WifiFingerPrint> wifiRadioMap;
     private List<OfflineScan> offlineScans;
-    private int scannedRssi;
     private double magnitude;
 
 

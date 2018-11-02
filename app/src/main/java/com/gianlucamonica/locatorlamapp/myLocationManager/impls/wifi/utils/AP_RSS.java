@@ -1,4 +1,4 @@
-package com.gianlucamonica.locatorlamapp.myLocationManager;
+package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.utils;
 
 public class AP_RSS {
 

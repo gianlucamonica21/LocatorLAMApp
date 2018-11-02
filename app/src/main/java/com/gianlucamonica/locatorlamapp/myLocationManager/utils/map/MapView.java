@@ -8,9 +8,9 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.offlineScan.OfflineScan;

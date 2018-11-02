@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.gianlucamonica.locatorlamapp.R;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.magnetic.db.magneticFingerPrint.MagneticFingerPrint;
 import com.gianlucamonica.locatorlamapp.myLocationManager.MyLocationManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.onlineScan.OnlineScan;

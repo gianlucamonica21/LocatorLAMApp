@@ -8,13 +8,11 @@ import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.magnetic.MagneticUtil;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.magnetic.db.magneticFingerPrint.MagneticFingerPrint;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.EuclideanDistanceAlg;
+import com.gianlucamonica.locatorlamapp.myLocationManager.impls.onlinePhaseAlgs.EuclideanDistanceAlg;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
@@ -28,7 +26,6 @@ import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.S
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import static android.content.Context.SENSOR_SERVICE;
 
@@ -36,7 +33,6 @@ public class MagneticOnlineManager implements SensorEventListener {
 
     private DatabaseManager databaseManager;
     private Activity  activity;
-    private ArrayList<MagneticFingerPrint> magneticFingerPrints;
     private SensorManager sensorManager; // magnetic sensor's stuffs
     private int scanNumber = 0;
     private double magnitudeValue;
@@ -50,7 +46,6 @@ public class MagneticOnlineManager implements SensorEventListener {
 
     public MagneticOnlineManager(ArrayList<IndoorParams> indoorParams){
         databaseManager = new DatabaseManager();
-        magneticFingerPrints = new ArrayList<>();
         sensorManager = (SensorManager) MyApp.getContext().getSystemService(SENSOR_SERVICE);
         this.indoorParams = indoorParams;
         this.indoorParamsUtils = new IndoorParamsUtils();
@@ -71,7 +66,6 @@ public class MagneticOnlineManager implements SensorEventListener {
 
         if (offlineScans.size() > 0) {
 
-            Log.i("online manager","live magnitude " + MyApp.getMagnitude());
             List<LiveMeasurements> liveMeasurements =
                     databaseManager.getAppDatabase().getLiveMeasurementsDAO().getLiveMeasurements(1,"magn_rss");
             double liveMagnitude = liveMeasurements.get(0).getValue();
@@ -125,9 +119,8 @@ public class MagneticOnlineManager implements SensorEventListener {
             databaseManager.getAppDatabase().getLiveMeasurementsDAO().insert(
                     new LiveMeasurements(1,-1 , "magn_rss", magnitudeValue)
             );
-            MyApp.setMagnitude(magnitudeValue);
             // set value on the screen
-            Toast.makeText(MyApp.getContext(), "m.f. value " + this.magnitudeValue, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
             sensorManager.unregisterListener(this);
         }
     }

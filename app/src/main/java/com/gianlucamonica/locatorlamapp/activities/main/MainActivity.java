@@ -3,17 +3,14 @@ package com.gianlucamonica.locatorlamapp.activities.main;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.gianlucamonica.locatorlamapp.R;
-import com.gianlucamonica.locatorlamapp.activities.locate.LocateActivity;
 import com.gianlucamonica.locatorlamapp.activities.scanResults.ScanResultsActivity;
 import com.gianlucamonica.locatorlamapp.fragments.algorithm.AlgorithmFragment;
 import com.gianlucamonica.locatorlamapp.fragments.building.BuildingFragment;
@@ -21,26 +18,22 @@ import com.gianlucamonica.locatorlamapp.fragments.buttons.ButtonsFragment;
 import com.gianlucamonica.locatorlamapp.fragments.floor.FloorFragment;
 import com.gianlucamonica.locatorlamapp.fragments.param.MagnParamFragment;
 import com.gianlucamonica.locatorlamapp.fragments.scan.ScanFragment;
-import com.gianlucamonica.locatorlamapp.myLocationManager.LocationMiddleware;
 import com.gianlucamonica.locatorlamapp.myLocationManager.MyLocationManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algorithm.Algorithm;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.building.Building;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.buildingFloor.BuildingFloor;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.scanSummary.ScanSummary;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.permissionsManager.MyPermissionsManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName.MAGNETIC_FP;
-import static com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName.WIFI_RSS_FP;
 
 public class MainActivity extends AppCompatActivity implements
         BuildingFragment.BuildingListener, // building
@@ -179,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements
         ButtonsFragment buttonsFragment = (ButtonsFragment)
                 getSupportFragmentManager().findFragmentById(R.id.buttonsLayout);
         buttonsFragment.loadIndoorParams(indoorParams);
+        //buttonsFragment.manageLocateButton(offlineScan);
         // ****************************************************************
 
         if ( chosenConfig == null){

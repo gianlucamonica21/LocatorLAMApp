@@ -1,11 +1,9 @@
 package com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.offline;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -15,10 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gianlucamonica.locatorlamapp.myLocationManager.impls.wifi.WifiScanReceiver;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
@@ -141,7 +138,7 @@ public class WifiOfflineManager extends AppCompatActivity{
 
             }
             clickNumber++;
-            Toast.makeText(MyApp.getContext(), "Scanning in  " + nowGrid.getName() + " OK", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getContext(), "grid " + nowGrid.getName() + " scanned", Toast.LENGTH_SHORT).show();
             MyApp.getContext().unregisterReceiver(mWifiScanReceiver);
             mV.invalidate();
         }
@@ -160,7 +157,7 @@ public class WifiOfflineManager extends AppCompatActivity{
             });
             Toast.makeText(MyApp.getContext(),
                     "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
 
             return type.cast(mV);
         }else{

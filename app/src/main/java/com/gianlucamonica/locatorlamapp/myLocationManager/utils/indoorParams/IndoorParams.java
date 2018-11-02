@@ -1,4 +1,4 @@
-package com.gianlucamonica.locatorlamapp.myLocationManager.utils;
+package com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams;
 
 import java.io.Serializable;
 

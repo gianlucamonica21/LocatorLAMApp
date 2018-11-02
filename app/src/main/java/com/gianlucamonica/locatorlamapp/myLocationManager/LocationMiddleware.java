@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.gianlucamonica.locatorlamapp.myLocationManager.locAlgInterface.LocalizationAlgorithmInterface;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.permissionsManager.MyPermissionsManager;
 

@@ -18,25 +18,7 @@ public class MyApp extends Application {
     private static MyLocationManager myLocationManagerInstance;
     private static LocationMiddleware locationMiddlewareInstance;
     private static Activity activity;
-    private static double magnitude;
 
-    private static int rss;
-
-    public static void setInstance(MyApp instance) {
-        MyApp.instance = instance;
-    }
-
-    public static int getRss() {
-        return rss;
-    }
-
-    public static void setRss(int rss) {
-        MyApp.rss = rss;
-    }
-
-    public static MyApp getInstance() {
-        return instance;
-    }
 
     public static Context getContext(){
         return instance;
@@ -47,6 +29,14 @@ public class MyApp extends Application {
     public void onCreate() {
         instance = this;
         super.onCreate();
+    }
+
+    public static void setInstance(MyApp instance) {
+        MyApp.instance = instance;
+    }
+
+    public static MyApp getInstance() {
+        return instance;
     }
 
     public static MyLocationManager getMyLocationManagerInstance() {
@@ -73,11 +63,4 @@ public class MyApp extends Application {
         MyApp.activity = activity;
     }
 
-    public static double getMagnitude() {
-        return magnitude;
-    }
-
-    public static void setMagnitude(double magnitude) {
-        MyApp.magnitude = magnitude;
-    }
 }

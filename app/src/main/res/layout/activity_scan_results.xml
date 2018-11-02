@@ -33,7 +33,7 @@
                 android:text="Algorithm"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -44,7 +44,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:text="WIFI_RSS"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/wifiSuccTV"
@@ -77,7 +77,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/wifiScansTV"
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </TableRow>
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="MAGN_RSS"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/magnSuccTV"
@@ -107,7 +107,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/magnScansTV"
@@ -115,7 +115,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </TableRow>
     </TableLayout>

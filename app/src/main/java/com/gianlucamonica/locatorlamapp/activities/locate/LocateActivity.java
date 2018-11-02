@@ -1,5 +1,6 @@
 package com.gianlucamonica.locatorlamapp.activities.locate;
 
+import android.location.LocationListener;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,14 +9,15 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.gianlucamonica.locatorlamapp.R;
 import com.gianlucamonica.locatorlamapp.myLocationManager.LocationMiddleware;
 import com.gianlucamonica.locatorlamapp.myLocationManager.MyLocationManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.AlgorithmName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamName;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParams;
-import com.gianlucamonica.locatorlamapp.myLocationManager.utils.IndoorParamsUtils;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamName;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParams;
+import com.gianlucamonica.locatorlamapp.myLocationManager.utils.indoorParams.IndoorParamsUtils;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.MyApp;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.DatabaseManager;
 import com.gianlucamonica.locatorlamapp.myLocationManager.utils.db.algConfig.Config;
@@ -101,24 +103,9 @@ public class LocateActivity extends AppCompatActivity {
                 @Override
                 public void afterTextChanged(Editable s) {
 
-                    /*Thread one = new Thread() {
-                        public void run() {
-                            try {
-                                System.out.println("Does it work?");
-
-                                Thread.sleep(1000);
-
-                                System.out.println("Nope, it doesnt...again.");
-                            } catch(InterruptedException v) {
-                                System.out.println(v);
-                            }
-                        }
-                    };
-
-                    one.start();*/
                     //prima scansione
                     OnlineScan onlineScan = myLocationManager.locate();
-
+                    Toast.makeText(MyApp.getContext(),"Starting online scan",Toast.LENGTH_SHORT).show();
                     //OnlineScan onlineScan = locationMiddleware.locate();
                     Log.i("locate activity", "onlinescan " + onlineScan.toString());
                     estimatedGrid.setText(String.valueOf(onlineScan.getIdEstimatedPos()));
