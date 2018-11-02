@@ -48,13 +48,25 @@ public class ScanResultsActivity extends AppCompatActivity {
         }
 
 
-
         TextView m = findViewById(R.id.magnSuccTV);
-        m.setText(String.valueOf((magnSucc * 100)/ magnScans.size()));
+        if(magnScans.size() != 0){
+            m.setText(String.valueOf((magnSucc * 100)/ magnScans.size()));
+        }else{
+            m.setText("no scans");
+        }
 
         TextView w = findViewById(R.id.wifiSuccTV);
-        w.setText(String.valueOf((wifiSucc * 100)/ wifiScans.size()));
+        if(wifiScans.size() != 0){
+            w.setText(String.valueOf((wifiSucc * 100)/ wifiScans.size()));
+        }else{
+            w.setText("no scans");
+        }
 
+        TextView mScans = findViewById(R.id.magnScansTV);
+        mScans.setText(String.valueOf(magnScans.size()));
+
+        TextView wScans = findViewById(R.id.wifiScansTV);
+        wScans.setText(String.valueOf(wifiScans.size()));
 
 
 
