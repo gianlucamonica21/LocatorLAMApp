@@ -112,15 +112,17 @@ public class LocateActivity extends AppCompatActivity {
                     handler.removeCallbacks(runnable);
                     //todo inserire online scan in db
 
-                    int actualPos = -1;
-                    if(!actualGrid.getText().toString().equals("")){
-                        actualPos = Integer.parseInt(actualGrid.getText().toString());
-                    }
-                    onlineScan.setIdActualPos(actualPos );
-                    try {
-                        databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if(onlineScan != null){
+                        int actualPos = -1;
+                        if(!actualGrid.getText().toString().equals("")){
+                            actualPos = Integer.parseInt(actualGrid.getText().toString());
+                        }
+                        onlineScan.setIdActualPos(actualPos );
+                        try {
+                            databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     //successive altre scansioni
                     handler.postDelayed(runnable = new Runnable(){
@@ -129,16 +131,17 @@ public class LocateActivity extends AppCompatActivity {
                             OnlineScan onlineScan = myLocationManager.locate();
                             //OnlineScan onlineScan = locationMiddleware.locate();
 
-                            int actualPos = -1;
-                            if(!actualGrid.getText().toString().equals("")){
-                                actualPos = Integer.parseInt(actualGrid.getText().toString());
-                            }
-                            onlineScan.setIdActualPos(actualPos );
-
-                            try {
-                                databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            if(onlineScan != null){
+                                int actualPos = -1;
+                                if(!actualGrid.getText().toString().equals("")){
+                                    actualPos = Integer.parseInt(actualGrid.getText().toString());
+                                }
+                                onlineScan.setIdActualPos(actualPos );
+                                try {
+                                    databaseManager.getAppDatabase().getOnlineScanDAO().insert(onlineScan);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             estimatedGrid.setText(String.valueOf(onlineScan.getIdEstimatedPos()));

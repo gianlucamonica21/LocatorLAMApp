@@ -138,7 +138,7 @@ public class WifiOfflineManager extends AppCompatActivity{
 
             }
             clickNumber++;
-            Toast.makeText(MyApp.getContext(), "grid " + nowGrid.getName() + " scanned", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MyApp.getContext(), "square " + nowGrid.getName() + " scanned", Toast.LENGTH_SHORT).show();
             MyApp.getContext().unregisterReceiver(mWifiScanReceiver);
             mV.invalidate();
         }
@@ -156,7 +156,7 @@ public class WifiOfflineManager extends AppCompatActivity{
                 }
             });
             Toast.makeText(MyApp.getContext(),
-                    "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
+                    "Tap on the square corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
                     Toast.LENGTH_SHORT).show();
 
             return type.cast(mV);

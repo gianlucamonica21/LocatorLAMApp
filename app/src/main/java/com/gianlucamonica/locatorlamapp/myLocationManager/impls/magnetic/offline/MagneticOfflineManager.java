@@ -97,7 +97,7 @@ public class MagneticOfflineManager implements SensorEventListener {
             }
         });
         Toast.makeText(MyApp.getContext(),
-                "Tap on the grid corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
+                "Tap on the square corresponding to your position to do a scan, if you want to redo it click 'Redo Scan'",
                 Toast.LENGTH_SHORT).show();
 
         return type.cast(mV);
@@ -208,7 +208,7 @@ public class MagneticOfflineManager implements SensorEventListener {
                 }
                 // set value on the screen
                 Log.i("live magnitude", String.valueOf(liveMagnitude));
-                Toast.makeText(MyApp.getContext(), "grid " + liveGridName + " scanned", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApp.getContext(), "square " + liveGridName + " scanned", Toast.LENGTH_SHORT).show();
             }
         }
         sensorManager.unregisterListener(this);
