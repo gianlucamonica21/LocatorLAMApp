@@ -52,6 +52,7 @@ public class MagneticOnlineManager implements SensorEventListener {
         sensorManager.registerListener(this,
                 sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD),
                 SensorManager.SENSOR_DELAY_FASTEST);
+
     }
 
     public OnlineScan locate(){
@@ -68,6 +69,12 @@ public class MagneticOnlineManager implements SensorEventListener {
 
             List<LiveMeasurements> liveMeasurements =
                     databaseManager.getAppDatabase().getLiveMeasurementsDAO().getLiveMeasurements(1,"magn_rss");
+
+            if(liveMeasurements.size() == 0){
+                databaseManager.getAppDatabase().getLiveMeasurementsDAO().insert(
+                        new LiveMeasurements(1,-1 , "magn_rss", 50)
+                );
+            }
 
             double liveMagnitude = liveMeasurements.get(0).getValue();
             euclideanDistanceAlg = new EuclideanDistanceAlg(offlineScans,liveMagnitude);
@@ -116,7 +123,7 @@ public class MagneticOnlineManager implements SensorEventListener {
             this.magnitudeValue = Math.sqrt((magX * magX) + (magY * magY) + (magZ * magZ));
             Log.i("magn online man","magn value " + this.magnitudeValue);
             getMagnitude = true;
-            //todo inserisco in db live Measurements
+
             databaseManager.getAppDatabase().getLiveMeasurementsDAO().insert(
                     new LiveMeasurements(1,-1 , "magn_rss", magnitudeValue)
             );
