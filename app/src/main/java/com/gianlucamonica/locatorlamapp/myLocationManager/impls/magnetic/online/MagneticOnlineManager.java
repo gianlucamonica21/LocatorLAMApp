@@ -74,6 +74,8 @@ public class MagneticOnlineManager implements SensorEventListener {
                 databaseManager.getAppDatabase().getLiveMeasurementsDAO().insert(
                         new LiveMeasurements(1,-1 , "magn_rss", 50)
                 );
+                liveMeasurements =
+                        databaseManager.getAppDatabase().getLiveMeasurementsDAO().getLiveMeasurements(1,"magn_rss");
             }
 
             double liveMagnitude = liveMeasurements.get(0).getValue();
